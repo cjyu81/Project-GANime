@@ -1,0 +1,10 @@
+Vardan front end NN
+Vince front end back end connection
+Jamie NN
+Dan NN
+Charlie NN
+Evan back end connection
+
+Permanent website
+Pytorch
+Github projects 
