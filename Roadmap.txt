@@ -1,0 +1,6 @@
+This is the roadmap for Group 8 Project. Network to create anime backgrounds.
+
+Ultimate Goals
+-Website
+-Neural Network
+-Back end connection
