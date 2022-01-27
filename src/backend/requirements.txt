@@ -1,0 +1,13 @@
+uvicorn
+# python-multipart
+# ppgan
+pillow
+# paddlepaddle
+# numpy
+fastapi
+# cython
+torchvision
+torch
+# opencv-python
+# mxnet
+# dlib
