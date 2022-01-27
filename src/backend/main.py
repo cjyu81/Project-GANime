@@ -19,13 +19,12 @@ def home():
     return {"message": "Backend Site"}
 
 
-@app.get("/gan")
+@app.get("/api/gan/")
 def generate_gan():
     gan_image = gan() # generates an image
-    # bytes_io = io.BytesIO() # bytes buffer
-    # dcgan_image.save(bytes_io, format="PNG") # save image to buffer
-    # return Response(bytes_io.getvalue(), media_type="image/png") # response contains a PNG
-    return Response("images go here", media_type="text/html")
+    bytes_io = io.BytesIO() # bytes buffer
+    gan_image.save(bytes_io, format="PNG") # save image to buffer
+    return Response(bytes_io.getvalue(), media_type="image/png") # response contains a PNG
 
 
 if __name__ == "__main__":

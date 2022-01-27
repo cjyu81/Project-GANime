@@ -6,8 +6,8 @@ pillow
 # numpy
 fastapi
 # cython
-# torchvision
-# torch
+torchvision
+torch
 # opencv-python
 # mxnet
 # dlib
