@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import { Button } from "../Button";
 import Box from "@mui/material/Box";
+import axios from "axios";
+import logo from "../../logo.svg";
 
 function Gan() {
-  function getData() {
-    // create a new XMLHttpRequest
-    var xhr = new XMLHttpRequest();
+  const [imageSrc, setImageSrc] = useState("");
 
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        alert(xhr.response);
-      }
-    };
-    xhr.open("get", "http://backend:8088/api/gan", true);
-    xhr.setRequestHeader(
-      "Content-Type",
-      "application/x-www-form-urlencoded; charset=UTF-8"
-    );
-    xhr.send();
+  async function getData() {
+    let image;
+    console.log("Getting data from /api/gan");
+    let res = await axios.get("http://localhost:8088/api/gan", {
+      responseType: "arraybuffer",
+    });
+    // let res = await axios.get("https://i.imgur.com/MLsKJLZ.jpg", {
+    //   responseType: "arraybuffer",
+    // });
+    console.log(res);
+    alert(res.data);
+    // image = res.data;
+
+    // const urlCreator = window.URL || window.webkitURL;
+    // var imageUrl = window.URL.createObjectURL(
+    //   new Blob([image], { type: "image/png" })
+    // );
+    // console.log(imageUrl);
+    // setImageSrc(imageUrl);
+    let base64ImageString = Buffer.from(res.data, "binary").toString("base64");
+    let srcValue = "data:image/png;base64," + base64ImageString;
+    setImageSrc(srcValue);
+    return res.data;
   }
   return (
     <div
@@ -37,8 +49,16 @@ function Gan() {
               width: 1000,
               height: 500,
               backgroundColor: "primary.dark",
+              border: "5px dashed blue",
             }}
-          />
+          >
+            {" "}
+            {imageSrc == "" ? (
+              <img></img>
+            ) : (
+              <img src={imageSrc} height={500} width={1000}></img>
+            )}
+          </Box>
         </li>
         <li>
           <Button

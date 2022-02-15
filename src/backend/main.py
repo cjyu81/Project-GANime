@@ -5,6 +5,7 @@ import uvicorn
 from starlette.responses import Response
 
 from fastapi import FastAPI, File, UploadFile
+from starlette.middleware.cors import CORSMiddleware
 from model.gan import gan
 
 
@@ -13,18 +14,35 @@ app = FastAPI(
     description="""Visit port 8501 for the front end""",
     version="0.0.1")
 
+origins = [
+    "http://localhost",
+    "http://localhost:8088",
+    "http://localhost:3000",
+    "http://localhost:3000/gan",
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
-def home():
+async def home():
     return {"message": "Backend Site"}
 
 
 @app.get("/api/gan/")
-def generate_gan():
-    gan_image = gan() # generates an image
-    bytes_io = io.BytesIO() # bytes buffer
-    gan_image.save(bytes_io, format="PNG") # save image to buffer
-    return Response(bytes_io.getvalue(), media_type="image/png") # response contains a PNG
+async def generate_gan():
+    gan_image = gan()  # generates an image
+    bytes_io = io.BytesIO()  # bytes buffer
+    gan_image.save(bytes_io, format="PNG")  # save image to buffer
+    # response contains a PNG
+    return Response(bytes_io.getvalue(), media_type="image/png")
 
 
 if __name__ == "__main__":
