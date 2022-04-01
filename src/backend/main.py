@@ -11,14 +11,11 @@ from model.gan import gan
 
 app = FastAPI(
     title="World GAN",
-    description="""Visit port 8501 for the front end""",
+    description="""Visit port 3000 for the front end""",
     version="0.0.1")
 
 origins = [
-    "http://localhost",
-    "http://localhost:8088",
-    "http://localhost:3000",
-    "http://localhost:3000/gan",
+    "*",
 ]
 
 

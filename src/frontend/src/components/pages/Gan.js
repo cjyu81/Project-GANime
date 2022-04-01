@@ -24,15 +24,14 @@ function Gan() {
   ]);
   async function getData() {
     let image;
-    console.log("Getting data from /api/gan");
-    let res = await axios.get("http://localhost:8088/api/gan", {
+    console.log("Getting data from /api/gan/");
+    let res = await axios.get("http://sekaigani.me:8088/api/gan/", {
       responseType: "arraybuffer",
     });
     // let res = await axios.get("https://i.imgur.com/MLsKJLZ.jpg", {
     //   responseType: "arraybuffer",
     // });
     console.log(res);
-    alert(res.data);
     // image = res.data;
 
     // const urlCreator = window.URL || window.webkitURL;
