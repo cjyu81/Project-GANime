@@ -1,13 +1,11 @@
 uvicorn
-# python-multipart
-# ppgan
 pillow
-# paddlepaddle
-# numpy
+numpy
 fastapi
-# cython
-torchvision
-torch
-# opencv-python
-# mxnet
-# dlib
+scipy
+click
+requests
+tqdm
+pyspng
+ninja
+imageio-ffmpeg==0.4.3

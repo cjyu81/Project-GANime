@@ -10,8 +10,8 @@ function Gan() {
 
   async function getData() {
     let image;
-    console.log("Getting data from /api/gan");
-    let res = await axios.get("http://localhost:8088/api/gan", {
+    console.log("Getting data from /api/gan/");
+    let res = await axios.get("http://localhost:8088/api/stylegan/", {
       responseType: "arraybuffer",
     });
     // let res = await axios.get("https://i.imgur.com/MLsKJLZ.jpg", {
