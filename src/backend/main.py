@@ -1,17 +1,18 @@
 import io
+import random
 
 import uvicorn
-# from PIL import Image
-from starlette.responses import Response
 
+from starlette.responses import Response
 from fastapi import FastAPI, File, UploadFile
 from starlette.middleware.cors import CORSMiddleware
-from model.gan import gan
+
+from model.stylegan import stylegan
 
 
 app = FastAPI(
     title="World GAN",
-    description="""Visit port 3000 for the front end""",
+    description="""Visit port 80 for the front end""",
     version="0.0.1")
 
 origins = [
@@ -33,12 +34,15 @@ async def home():
     return {"message": "Backend Site"}
 
 
-@app.get("/api/gan/")
-async def generate_gan():
-    gan_image = gan()  # generates an image
+@app.get("/api/stylegan/")
+async def generate_stylegan():
+    gan_image = stylegan(
+        truncation_psi = 0.4,
+        network_pkl = 'network-snapshot-004200.pkl',
+        seeds = random.randint(0, 99999),
+    )
     bytes_io = io.BytesIO()  # bytes buffer
     gan_image.save(bytes_io, format="PNG")  # save image to buffer
-    # response contains a PNG
     return Response(bytes_io.getvalue(), media_type="image/png")
 
 
